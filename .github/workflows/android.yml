@@ -30,8 +30,10 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Add Android Platform
-        run: cordova platform add android
+      - name: Prepare Android Platform
+        run: |
+          cordova platform rm android || true
+          cordova platform add android
 
       - name: Build APK
         run: cordova build android
