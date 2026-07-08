@@ -1,6 +1,14 @@
 {
-  "name":"yc-exam-quiz",
-  "displayName":"YC EXAM QUIZ",
-  "version":"1.0.0",
-  "private":true
+  "name": "yc-exam-quiz",
+  "displayName": "YC EXAM QUIZ",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "cordova-android": "^15.0.0"
+  },
+  "cordova": {
+    "platforms": [
+      "android"
+    ]
+  }
 }
