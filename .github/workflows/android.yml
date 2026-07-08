@@ -1,8 +1,43 @@
-name: Android Build
-on: [workflow_dispatch]
+name: Build APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v4
-    - run: echo "Add Cordova build steps here"
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Cordova
+        run: npm install -g cordova
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Add Android Platform
+        run: cordova platform add android
+
+      - name: Build APK
+        run: cordova build android
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: YC-EXAM-QUIZ-APK
+          path: platforms/android/app/build/outputs/apk/debug/*.apk
